@@ -7,14 +7,14 @@ class UsersController < ApplicationController
 		@user = User.new(user_params)
 		if @user.save
 			authenticate_service = Auth::UserAuthenticateService.new(@user.email, @user.password)
-	    if authenticate_service
-	      session[:user_id] = user.id
+	    if user_id = authenticate_service.authenticate
+	    	session[:user_id] = user_id
 	      redirect_to users_path
 	    else
 	    	p 'user create faild!!'
 	    end
 	  else
-	  	render "new"
+	  	render login_path
 		end
 	end
 

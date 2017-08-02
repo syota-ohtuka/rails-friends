@@ -6,15 +6,19 @@ class Auth::UserAuthenticateService
 
 	def authenticate
 		return false unless @user
-    BCrypt::Password.new(@user.password_digest) == unencrypted_password ? @user : false
+    if BCrypt::Password.new(@user.password_digest) == unencrypted_password
+    	return @user.id
+    else
+    	return false
+    end
 	end
 
 	private
-	attr_reader :user, :unencrypted_password
+		attr_reader :user, :unencrypted_password
 
-	def user_password
-    @user_password ||= -> do
-      BCrypt::Password.new(user.password_digest)
+		def user_password
+	    @user_password ||= -> do
+	      BCrypt::Password.new(user.password_digest)
+			end
 		end
-	end
 end

@@ -6,6 +6,9 @@
 </head>
 <body>
   <h1>User page</h1>
+  <% flash.each do |key, value| %>
+    <%= value %>
+  <% end %>
   <p>
     <strong>name:</strong>
     <%= @show_user.name %>

@@ -52,9 +52,10 @@ class UsersController < ApplicationController
 	end
 
 	def permission_check
-		p current_user
-		if current_user.id == params[:id]
-			redirect_to user_path(@show_user_path)
+		p current_user.id
+		p params[:id].to_i
+		if current_user.id != params[:id].to_i
+			redirect_to user_path(params[:id]), flash: { denger: '権限がありません。'}
 		end
 	end
 end

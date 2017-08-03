@@ -27,12 +27,13 @@ class UsersController < ApplicationController
 			@voices += user.voices
 			end
 		end
-		@voices.sort { |aa, bb| bb.created_at <=> aa.created_at }
-		p @voices
+		@voices_res = @voices.sort { |aa, bb| bb.created_at <=> aa.created_at }
 	end
 
 	def show
 		@show_user = User.find(params[:id])
+		@voices = @show_user.voices
+		@voices_res = @voices.sort { |aa, bb| bb.created_at <=> aa.created_at }
 	end
 
 	def edit
@@ -71,8 +72,6 @@ class UsersController < ApplicationController
 	end
 
 	def permission_check
-		p current_user.id
-		p params[:id].to_i
 		if current_user.id != params[:id].to_i
 			redirect_to user_path(params[:id]), flash: { denger: '権限がありません。'}
 		end

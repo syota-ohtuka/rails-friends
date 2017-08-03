@@ -55,5 +55,15 @@
   <% if @show_user.id == current_user.id %>
    | <%= link_to 'Edit', edit_user_path(@show_user) %>
   <% end %>
+
+  <h2>Voice history</h2>
+  <ul>
+  <% @voices_res.each do |voice| %>
+    <li style="margin-bottom: 10px">
+      <strong>speaker : </strong><%= link_to voice.user.name, user_path(voice.user.id) %><br>
+      <strong>voice : </strong><%= voice.text %>
+    </li>
+  <% end %>
+  </ul>
 </body>
 </html>

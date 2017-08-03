@@ -6,5 +6,7 @@ Rails.application.routes.draw do
 
 	get 'friend/search', to: 'friends#index'
 	post 'friend/search', to: 'friends#search'
+	post 'friend/follow', to: 'friends#create'
+	delete 'friend/follow', to: 'friends#destroy'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

@@ -9,6 +9,27 @@
     <h1>My page</h1>
   <% else %>
     <h1>User page</h1>
+    <% msg = "" %>
+    <% if current_user.followed_by?(User.find(@show_user.id)) %>
+      <% msg = "followされているよ!!" %>
+      <% if current_user.following?(User.find(@show_user.id)) %>
+        <% msg = "nice friend!!" %>
+      <% end %>
+    <% end %>
+    <p><%= msg %></p>
+    <% if current_user.following?(User.find(@show_user.id)) %>
+      <%= form_tag friend_follow_path,
+      :method => "delete" do %>
+        <%= hidden_field_tag :to_user_id, @show_user.id %>
+        <%= submit_tag "unfollow" %>
+      <% end %>
+    <% else %>
+      <%= form_tag friend_follow_path,
+      :method => "post" do %>
+        <%= hidden_field_tag :to_user_id, @show_user.id %>
+        <%= submit_tag "follow" %>
+      <% end %>
+    <% end %>
   <% end %>
 
   <% flash.each do |key, value| %>

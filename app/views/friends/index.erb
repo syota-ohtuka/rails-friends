@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Friend search</title>
+</head>
+<body>
+  <h1>friend search!!</h1>
+  <%= form_tag friends_search_path,
+    :method => "post" do %>
+    <p>
+      <%= label_tag :search_word %>
+      <%= text_field_tag :search_word %>
+    </p>
+    <p><%= submit_tag "Search" %></p>
+  <% end %>
+
+  <% if !@search_user.nil? && @search_user.id != current_user.id %>
+    <h2>hit!!</h2>
+    <p><strong>name : </strong><%= link_to @search_user.name, user_path(@search_user.id) %></p>
+  <% else %>
+    <h2><%= flash[:error] %></h2>
+    <% flash[:error] = "" %>
+  <% end %>
+  <%= link_to 'Back top', users_path %>
+</body>
+</html>

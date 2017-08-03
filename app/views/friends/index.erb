@@ -6,7 +6,7 @@
 </head>
 <body>
   <h1>friend search!!</h1>
-  <%= form_tag friend_search_path,
+  <%= form_tag friends_search_path,
     :method => "post" do %>
     <p>
       <%= label_tag :search_word %>
@@ -17,10 +17,11 @@
 
   <% if !@search_user.nil? && @search_user.id != current_user.id %>
     <h2>hit!!</h2>
-      <strong>name : </strong><%= link_to @search_user.name, user_path(@search_user.id) %>
+    <p><strong>name : </strong><%= link_to @search_user.name, user_path(@search_user.id) %></p>
   <% else %>
     <h2><%= flash[:error] %></h2>
     <% flash[:error] = "" %>
   <% end %>
+  <%= link_to 'Back top', users_path %>
 </body>
 </html>

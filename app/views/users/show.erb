@@ -18,13 +18,13 @@
     <% end %>
     <p><%= msg %></p>
     <% if current_user.following?(User.find(@show_user.id)) %>
-      <%= form_tag friend_follow_path,
+      <%= form_tag friends_follow_path,
       :method => "delete" do %>
         <%= hidden_field_tag :to_user_id, @show_user.id %>
         <%= submit_tag "unfollow" %>
       <% end %>
     <% else %>
-      <%= form_tag friend_follow_path,
+      <%= form_tag friends_follow_path,
       :method => "post" do %>
         <%= hidden_field_tag :to_user_id, @show_user.id %>
         <%= submit_tag "follow" %>
@@ -48,9 +48,12 @@
     <%= @show_user.search_word %>
   </p>
 
+  <%= link_to 'Follow list', :action => 'follow' %>
+   | <%= link_to 'Follower list', :action => 'follower' %><br>
+
   <%= link_to 'Back top', users_path %>
   <% if @show_user.id == current_user.id %>
-    | <%= link_to 'Edit', edit_user_path(@show_user) %>
-  <% end  %>
+   | <%= link_to 'Edit', edit_user_path(@show_user) %>
+  <% end %>
 </body>
 </html>

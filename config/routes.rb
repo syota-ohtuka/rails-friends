@@ -4,9 +4,12 @@ Rails.application.routes.draw do
 	get 'logout', to: 'sessions#destroy'
 	resources :users
 
-	get 'friend/search', to: 'friends#index'
-	post 'friend/search', to: 'friends#search'
-	post 'friend/follow', to: 'friends#create'
-	delete 'friend/follow', to: 'friends#destroy'
+	get 'users/:id/follow', to: 'users#follow'
+	get 'users/:id/follower', to: 'users#follower'
+
+	get 'friends/search', to: 'friends#index'
+	post 'friends/search', to: 'friends#search'
+	post 'friends/follow', to: 'friends#create'
+	delete 'friends/follow', to: 'friends#destroy'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

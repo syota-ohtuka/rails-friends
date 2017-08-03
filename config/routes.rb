@@ -11,5 +11,7 @@ Rails.application.routes.draw do
 	post 'friends/search', to: 'friends#search'
 	post 'friends/follow', to: 'friends#create'
 	delete 'friends/follow', to: 'friends#destroy'
+
+	post 'voices', to: 'voices#create'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

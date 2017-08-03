@@ -15,7 +15,7 @@
     <p><%= submit_tag "Search" %></p>
   <% end %>
 
-  <% if !@search_user.nil? && @search_user.id != current_user.id %>
+  <% if !@search_user.nil? %>
     <h2>hit!!</h2>
     <p><strong>name : </strong><%= link_to @search_user.name, user_path(@search_user.id) %></p>
   <% else %>

@@ -5,7 +5,12 @@
   <title>User Page</title>
 </head>
 <body>
-  <h1>User page</h1>
+  <% if @show_user.id == current_user.id %>
+    <h1>My page</h1>
+  <% else %>
+    <h1>User page</h1>
+  <% end %>
+
   <% flash.each do |key, value| %>
     <%= value %>
   <% end %>
@@ -17,8 +22,14 @@
     <strong>email:</strong>
     <%= @show_user.email %>
   </p>
+  <p>
+    <strong>search_word:</strong>
+    <%= @show_user.search_word %>
+  </p>
 
   <%= link_to 'Back top', users_path %>
-  | <%= link_to 'Edit', edit_user_path(@show_user) %>
+  <% if @show_user.id == current_user.id %>
+    | <%= link_to 'Edit', edit_user_path(@show_user) %>
+  <% end  %>
 </body>
 </html>

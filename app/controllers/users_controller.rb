@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-	before_action :login_check, only: %i(index new edit create update destroy)
+	before_action :login_check, only: %i(index edit update destroy)
 	before_action :permission_check, only: %i(edit)
 	def new
 		@user = User.new
@@ -16,7 +16,7 @@ class UsersController < ApplicationController
 	    	p 'user create faild!!'
 	    end
 	  else
-	  	render login_path
+	  	render new_user_path
 		end
 	end
 
@@ -42,7 +42,7 @@ class UsersController < ApplicationController
 
 	private
 	def user_params
-		params.require(:user).permit(:name, :email, :password, :password_confirmation)
+		params.require(:user).permit(:name, :email, :search_word, :password, :password_confirmation)
 	end
 
 	def login_check

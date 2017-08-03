@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170802085647) do
+ActiveRecord::Schema.define(version: 20170802222000) do
+
+  create_table "friends", force: :cascade do |t|
+    t.integer "from_user_id"
+    t.integer "to_user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["from_user_id", "to_user_id"], name: "index_friends_on_from_user_id_and_to_user_id", unique: true
+    t.index ["from_user_id"], name: "index_friends_on_from_user_id"
+    t.index ["to_user_id"], name: "index_friends_on_to_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "password_digest"
@@ -18,6 +28,7 @@ ActiveRecord::Schema.define(version: 20170802085647) do
     t.string "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "search_word"
   end
 
 end

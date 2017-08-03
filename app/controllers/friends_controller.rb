@@ -4,9 +4,13 @@ class FriendsController < ApplicationController
 	end
 
 	def search
-		@search_user = User.find_by(search_word: params[:search_word])
-		if @search_user.nil?
-			flash[:error] = "no hit..."
+		if params[:search_word] != current_user.search_word
+			@search_user = User.find_by(search_word: params[:search_word])
+			if @search_user.nil?
+				flash[:error] = "no hit..."
+			end
+		else
+			flash[:error] = "That's mine..."
 		end
 		render "index"
 	end

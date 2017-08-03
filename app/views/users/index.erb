@@ -9,5 +9,21 @@
   <%= link_to 'Logout', logout_path, data: { confirm: 'また遊びに来てくれますか？' } %>
   <%= link_to 'Show user', user_path(current_user) %>
   <%= link_to 'Search friends!!', friends_search_path %>
+  <%= form_tag voices_path,
+    :method => "post" do %>
+    <p>
+      <%= label_tag :text %>
+      <%= text_field_tag :text %>
+    </p>
+    <p><%= submit_tag "speak!!" %></p>
+  <% end %>
+  <ul>
+    <% @voices.each do |voice| %>
+      <li style="margin-bottom: 10px">
+        <strong>speaker : </strong><%= link_to voice.user.name, user_path(voice.user.id) %><br>
+        <strong>voice : </strong><%= voice.text %>
+      </li>
+    <% end %>
+  </ul>
 </body>
 </html>

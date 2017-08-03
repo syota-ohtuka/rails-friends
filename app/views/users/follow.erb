@@ -7,9 +7,10 @@
 <body>
   <h1>Follow list</h1>
   <ul>      
-      <% @follows.each do |user| %>
-        <li><strong>name : </strong><%= link_to user.name, user_path(user.id) %></li>
-      <% end %>
+    <% @follows.each do |user| %>
+      <li><strong>name : </strong><%= link_to user.name, user_path(user.id) %></li>
+    <% end %>
   </ul>
+  <%= link_to "Back user page", user_path(@user) %>
 </body>
 </html>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170802222000) do
+ActiveRecord::Schema.define(version: 20170803171034) do
 
   create_table "friends", force: :cascade do |t|
     t.integer "from_user_id"
@@ -29,6 +29,14 @@ ActiveRecord::Schema.define(version: 20170802222000) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "search_word"
+  end
+
+  create_table "voices", force: :cascade do |t|
+    t.string "text"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_voices_on_user_id"
   end
 
 end

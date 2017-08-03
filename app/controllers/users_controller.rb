@@ -14,13 +14,21 @@ class UsersController < ApplicationController
 	      redirect_to users_path
 	    else
 	    	p 'user create faild!!'
+	    	redirect_to login_path
 	    end
-	  else
-	  	render new_user_path
 		end
 	end
 
 	def index
+		@voices = current_user.voices
+		@target_user = User.find(current_user.id).following
+		if !@target_user.nil?
+		@target_user.each do |user|
+			@voices += user.voices
+			end
+		end
+		@voices.sort { |aa, bb| bb.created_at <=> aa.created_at }
+		p @voices
 	end
 
 	def show
@@ -41,10 +49,12 @@ class UsersController < ApplicationController
 	end
 
 	def follow
+		@user = User.find(params[:id])
 		@follows = User.find(params[:id]).following
 	end
 
 	def follower
+		@user = User.find(params[:id])
 		@followers = User.find(params[:id]).followed
 	end
 

@@ -3,6 +3,7 @@ class User < ApplicationRecord
 	has_many :follows_to,   class_name: Friend, foreign_key: :to_user_id,   dependent: :destroy
 	has_many :following, through: :follows_from, source: :to_user
 	has_many :followed,  through: :follows_to,   source: :from_user
+	has_many :voices, dependent: :destroy
 	has_secure_password
 	VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 	validates :name, presence: true

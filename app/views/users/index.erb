@@ -18,7 +18,7 @@
     <p><%= submit_tag "speak!!" %></p>
   <% end %>
   <ul>
-    <% @voices.each do |voice| %>
+    <% @voices_res.each do |voice| %>
       <li style="margin-bottom: 10px">
         <strong>speaker : </strong><%= link_to voice.user.name, user_path(voice.user.id) %><br>
         <strong>voice : </strong><%= voice.text %>
